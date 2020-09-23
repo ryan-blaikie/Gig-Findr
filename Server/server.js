@@ -4,12 +4,18 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const mongo = require('mongodb');
+const mongoose = require('mongoose');
+const assert = require('assert'); //for testing
+// const morgan = require('morgan'); //logs all access
+
+const eventModel = require('./eventSchema') //Model for MongoDB
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); //transforms each req to json format
 app.use(cors());
+// app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
 // let dir = __dirname.slice(0, -7); //parent folder
 // app.use(express.static(`${dir}./Client/public`));//test
@@ -57,4 +63,36 @@ app.get('/testMessage'), (req, res) =>{
     res.text({
         body: "Hello there"
     })
+}
+
+
+
+const mongoUri = "mongodb+srv://ryan-blaikie:Wumbo22*@free-cluster.xabww.mongodb.net/MongoGigDB?retryWrites=true&w=majority";
+
+mongoose.connect(mongoUri, {
+        useNewUrlParser : true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    })
+    .then(() => 
+        console.log('MongdoDB database connected.'));
+        uploadData()
+    
+    .catch((err) => console.log(err));
+
+
+async function uploadData(){
+    const testEvent = new eventModel({
+        name : "Test Event",
+        address : "Somewhere in Auckland"
+    });
+    try{
+        await testEvent.save();
+        console.log("Data has been saved to the MongoDB Cloud.");
+    }
+    catch(err){
+        console.log(err);
+        console.log("Data not saved to cloud :(");
+    }
 }
