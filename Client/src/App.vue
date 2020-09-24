@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="FindaGig" />
-    <input placeholder="Custom input on App.vue" v-model="msgData">
+    <input placeholder="Type something then click 'Display Data'" v-model="msgData">
     <Inputs ref="inputTest"/>
     <button v-on:click="accessServer">Access Server</button>
     <button v-on:click="saveData">Save Data to Cloud</button>
@@ -55,14 +55,15 @@ export default {
     
         //Display response
         fetch('http://localhost:4000/saveData', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                'Content-Type': 'application/json',
+              //  'Access-Control-Allow-Origin': '*'
             },
-            // body: {
-            //   name : "Client Test Name",
-            //   address : "Clinet Test Address"
-            // }
+            body: JSON.stringify({
+              name : this.$refs.inputTest.eAddress,
+              address : this.$refs.inputTest.eName
+            })
         })
         .then (response => response.json())
         .then (response => {
@@ -90,5 +91,6 @@ export default {
   margin-top: 60px;
   background-color: black;
   padding-bottom: 150px;
+  padding-top: 100px;
 }
 </style>

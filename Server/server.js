@@ -14,7 +14,12 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(bodyParser.json()); //transforms each req to json format
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:8080', //allow post acces from client
+    methods: "GET, PUT, POST"
+  }
+  
+app.use(cors(corsOptions));
 // app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
 // let dir = __dirname.slice(0, -7); //parent folder
@@ -60,16 +65,19 @@ app.get('/getData', (req, res) => {
 
 app.get('/testMessage'), (req, res) =>{
 
-    res.text({
+    res.json({
         body: "Hello there"
     })
 }
 
-app.get('/saveData', (req, res) =>{
-    let jsonObj = {
-        name : "ServerTestName", 
-        address: "ServerTestAddress"
-    }
+// let corsOptions = {
+//     origin: 'http://localhost:8080', //allow post acces from client
+//   }
+
+app.post('/saveData', (req, res) =>{
+    
+    let jsonObj = req.body;
+       
     uploadData(jsonObj);
     res.json({
         body: "Data saved to MongoDB Atlas"
