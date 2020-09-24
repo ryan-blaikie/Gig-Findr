@@ -65,6 +65,17 @@ app.get('/testMessage'), (req, res) =>{
     })
 }
 
+app.get('/saveData', (req, res) =>{
+    let jsonObj = {
+        name : "ServerTestName", 
+        address: "ServerTestAddress"
+    }
+    uploadData(jsonObj);
+    res.json({
+        body: "Data saved to MongoDB Atlas"
+    })
+})
+
 
 
 const mongoUri = "mongodb+srv://ryan-blaikie:Wumbo22*@free-cluster.xabww.mongodb.net/MongoGigDB?retryWrites=true&w=majority";
@@ -76,16 +87,16 @@ mongoose.connect(mongoUri, {
         useFindAndModify: false,
     })
     .then(() => 
-        console.log('MongdoDB database connected.'));
-        uploadData()
+        console.log('MongdoDB database connected.'))
+        // uploadData()
     
     .catch((err) => console.log(err));
 
 
-async function uploadData(){
+async function uploadData(jsonObj){
     const testEvent = new eventModel({
-        name : "Test Event",
-        address : "Somewhere in Auckland"
+        name : jsonObj.name,
+        address : jsonObj.address
     });
     try{
         await testEvent.save();
