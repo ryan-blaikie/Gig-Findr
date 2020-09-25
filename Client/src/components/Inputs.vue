@@ -1,9 +1,10 @@
 <template>
     <div class="inputs">
-        <p>Event Name</P><input id="nameInput" v-model="eName" placeholder="Enter your event's name">
-         <p>Event Address</P><input id="addressInput" v-model="eAddress" placeholder="Enter your event's address">
-
-         <p>Lol ur address is {{eAddress}} xD</p>
+        <p>Let us know you've visited us!</p>
+        <p>Your name</P><input id="nameInput" v-model="eName" placeholder="Enter your name">
+        <p>Your city</P><input id="addressInput" v-model="eAddress" placeholder="Enter your city">
+        <button v-on:click="saveData">Check In</button>
+         <!-- <p>Lol ur address is {{eAddress}} xD</p> Example using modeled data from same file -->
     </div>
 </template>
 <script>
@@ -17,7 +18,24 @@ export default {
         }
     }, 
     methods : {
-        
+        saveData(){
+
+        fetch('http://localhost:4000/saveData', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name : this.eName,
+              address : this.eAddress
+            })
+        })
+        .then (response => response.json())
+        .then (response => {
+          alert("Thanks! " + response.body);
+          })
+        .catch(error => console.log(error));
+  }, 
     }
 
 

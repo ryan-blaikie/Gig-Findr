@@ -2,11 +2,12 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="FindaGig" />
-    <input placeholder="Type something then click 'Display Data'" v-model="msgData">
+    <!-- <input placeholder="Type something then click 'Display Data'" v-model="msgData"> Experiment to manipulate data from same file -->
     <Inputs ref="inputTest"/>
+    <!-- <button v-on:click="saveData">Check In</button> //Button moved to other file--> 
+  <br><br>
     <button v-on:click="accessServer">Access Server</button>
-    <button v-on:click="saveData">Save Data to Cloud</button>
-    <button v-on:click="displayData">Display Data</button>
+    <!-- <button v-on:click="displayData">Display Data</button> Experiment to manipulate data from same file -->
   </div>
 </template>
 
@@ -25,7 +26,6 @@ export default {
   },
   methods:{
      accessServer(){
-      //  let dir = __dirname.slice(0, -7); //parent folder
         const options = {
             method: 'GET',
             headers: {
@@ -38,45 +38,38 @@ export default {
         .then (data => {
           console.log(data);
           console.log(typeof(data));
-        // fetch(`http://localhost:4000`, options)
-        // .then(response => response.text)
-        // .then (data => {
-        //   console.log(data);
         
           })
         .catch(error => console.log(error));
-  }, saveData(){
-        //     const options = {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type':'application/json'
-        //     }
-        // }
-    
-        //Display response
-        fetch('http://localhost:4000/saveData', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-              //  'Access-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify({
-              name : this.$refs.inputTest.eAddress,
-              address : this.$refs.inputTest.eName
-            })
-        })
-        .then (response => response.json())
-        .then (response => {
-          console.log(response);
-          })
-        .catch(error => console.log(error));
   }, 
-  displayData(){
-    alert(this.msgData);
-    console.log(this.$refs.inputTest)
-    alert("Address is " + this.$refs.inputTest.eAddress);
-    alert("Name is " + this.$refs.inputTest.eName);
-  }
+
+  // This is how to access info from a child component (if button on this file)
+// saveData(){
+
+//         fetch('http://localhost:4000/saveData', {
+//             method: 'POST',
+//             headers: {
+//                'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//               name : this.$refs.inputTest.eName,
+//               address : this.$refs.inputTest.eAddress
+//             })
+//         })
+//         .then (response => response.json())
+//         .then (response => {
+//           alert("Thanks! " + response.body);
+//           })
+//         .catch(error => console.log(error));
+//   }, 
+
+  // This used as experiment to manipulate data from same file
+  // displayData(){
+  //   alert(this.msgData);
+  //   console.log(this.$refs.inputTest)
+  //   alert("Address is " + this.$refs.inputTest.eAddress);
+  //   alert("Name is " + this.$refs.inputTest.eName);
+  // }
 }
 }
 </script>

@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const assert = require('assert'); //for testing
 // const morgan = require('morgan'); //logs all access
 
-const eventModel = require('./eventSchema') //Model for MongoDB
+
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -100,11 +100,13 @@ mongoose.connect(mongoUri, {
     
     .catch((err) => console.log(err));
 
+const eventModel = require('./eventSchema') //Model for MongoDB
+const userModel = require('./userSchema') //Model for MongoDB
 
 async function uploadData(jsonObj){
-    const testEvent = new eventModel({
+    const testEvent = new userModel ({
         name : jsonObj.name,
-        address : jsonObj.address
+        city : jsonObj.address
     });
     try{
         await testEvent.save();
