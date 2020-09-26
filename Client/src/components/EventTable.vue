@@ -50,6 +50,7 @@
       :items="items"
       :items-per-page.sync="itemsPerPage"
       hide-default-footer
+      :search="search"
     >
       <template v-slot:header>
         <v-toolbar
@@ -58,10 +59,19 @@
           dark
           flat
         >
+                    <v-text-field
+                v-model="search"
+                clearable
+                flat
+                solo-inverted
+                hide-details
+
+                label="Try searching for your city"
+            ></v-text-field>
           <v-toolbar-title></v-toolbar-title>
         </v-toolbar>
       </template>
-
+    <br>
       <template v-slot:default="props">
         <v-row>
           <v-col
@@ -70,7 +80,7 @@
             cols="12"
             sm="6"
             md="4"
-            lg="3"
+            lg="4"
           >
             <v-card>
               <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
@@ -79,18 +89,18 @@
 
               <v-list dense>
                 <v-list-item>
-                  <v-list-item-content>Location:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.location.name }}</v-list-item-content>
-                </v-list-item>
-
-                <v-list-item>
                   <v-list-item-content>Genre:</v-list-item-content>
                   <v-list-item-content class="align-end">{{ item.category.name }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
+                  <v-list-item-content>Location:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.location_summary }}</v-list-item-content>
+                </v-list-item>
+
+                <v-list-item>
                   <v-list-item-content>Time:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.datetime_summary }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.datetime_summary }}, {{item.datetime_start}}</v-list-item-content>
                 </v-list-item>
 
                 
@@ -98,17 +108,6 @@
             </v-card>
           </v-col>
         </v-row>
-      </template>
-
-      <template v-slot:footer>
-        <v-toolbar
-          class="mt-2"
-          color="indigo"
-          dark
-          flat
-        >
-          <v-toolbar-title class="subheading"></v-toolbar-title>
-        </v-toolbar>
       </template>
     </v-data-iterator>
   </v-container>
@@ -129,7 +128,9 @@ export default {
     data(){
         return {
             eventData : '',
-            items: ''
+            items: '',
+            itemsPerPage : 10,
+            search: '',
         }
     },
     methods: {
@@ -197,6 +198,11 @@ export default {
         .then (response => response.json())
         .then (data => {
             this.eventData = data.body;
+            data.body.forEach(e => {
+                e.datetime_start = e.datetime_start.split(' '); //getting the time
+                e.datetime_start = e.datetime_start[1].slice(0,5);
+                e.timezone = ""; //remove name of Auckland as messing with search
+            });
             this.items = data.body;
           console.log(this.eventData);
         //   this.createTable(this.eventData, "");
