@@ -1,9 +1,7 @@
 <template>
     <div>
-        <button v-on:click="accessServer">Get Event Data</button><br><br>
-
-            <div ref="filters">
-        <form>
+    <!-- <div ref="filters"> -->
+        <!-- <form>
             <select ref="city" class="centred">
               <option value="">(All Cities)</option>
               <option value="Auckland">Auckland</option>
@@ -14,7 +12,7 @@
             </select>
           </form>
     </div>
-    <button ref="filterbtn">Apply Filters</button>
+    <button ref="filterbtn" v-on:click="applyFilters">Apply Filters</button> -->
     <br><br><br>
     <table ref="gigs" width="80%">
     </table>
@@ -31,7 +29,7 @@ export default {
     name:'EventTable', 
     data(){
         return {
-            
+            eventData : ''
         }
     },
     methods: {
@@ -98,16 +96,25 @@ export default {
         fetch('http://localhost:4000/getData', options)
         .then (response => response.json())
         .then (data => {
-            data = data.body;
-          console.log(data);
-          this.createTable(data, "");
+            this.eventData = data.body;
+          console.log(this.eventData);
+          this.createTable(this.eventData, "");
           })
           
         .catch(error => console.log(error));
   }, 
-    //new method can go here
-    }
+    // applyFilters(){
+    //     // alert(this.$refs.city.value);
+    //     let city = this.$refs.city.value;
+    //     this.$refs.gigs.clear();
+    //     this.createTable(this.eventData, city);
+    // }
+    },
+    mounted(){
+        this.accessServer();
+    },
 }
+    
 </script>
 
 <style scoped>
