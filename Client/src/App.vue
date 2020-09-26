@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <HelloWorld msg="FindaGig" />
-    <img src='./assets/gig-pic.jpg'>
+    <br><img src='./assets/gig-pic.jpg'>
     <!-- <input placeholder="Type something then click 'Display Data'" v-model="msgData"> Experiment to manipulate data from same file -->
-
+    <br><br>
+    <h2>Upcoming Gigs:</h2>
     <!-- <button v-on:click="saveData">Check In</button> //Button moved to other file--> 
-  <br><br>
+
     <EventTable/>
     <!-- <button v-on:click="displayData">Display Data</button> Experiment to manipulate data from same file -->
   <br>    <Inputs ref="inputTest"/>
