@@ -1,9 +1,37 @@
 <template>
     <div class="inputs">
         <h2>...<br>Let us know you've visited us!</h2>
-        <p>Your name</p><input id="nameInput" v-model="eName" placeholder="Enter your name">
-        <p>Your city</p><input id="addressInput" v-model="eAddress" placeholder="Enter your city">
-        <br><br><button v-on:click="saveData">Check In</button>
+    <div id="inputs">
+
+    <v-container fluid>
+    <v-row>
+    <v-col cols="3"></v-col>
+    <v-col cols="3">
+          <v-text-field 
+            background-color="black"
+            label="Your Name"
+            filled 
+            v-model="name"
+          ></v-text-field>
+    </v-col>
+    <v-col cols="3">
+          <v-text-field
+            label="Your City"
+            filled
+            v-model="city"
+          ></v-text-field>
+    </v-col>
+    <v-col cols="3"></v-col>
+    </v-row>
+
+    </v-container>
+
+    </div>
+        
+        <v-btn class="mx-2" fab dark color="yellow" v-on:click="saveData"> 
+            <v-icon dark>mdi-plus</v-icon>
+        </v-btn>
+        <!-- ^^^^Color attribute not working? -->
          <!-- <p>Lol ur address is {{eAddress}} xD</p> Example using modeled data from same file -->
     </div>
 </template>
@@ -13,8 +41,8 @@ export default {
     props: [''],
     data(){ //is this only used for internal reference and not for exporting?
         return {
-            eName : '', 
-            eAddress : ''
+            name : '', 
+            city : ''
         }
     }, 
     methods : {
@@ -26,8 +54,8 @@ export default {
                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              name : this.eName,
-              address : this.eAddress
+              name : this.name,
+              address : this.city
             })
         })
         .then (response => response.json())
@@ -36,6 +64,9 @@ export default {
           })
         .catch(error => console.log(error));
   }, 
+  notify(){
+    alert(this.eName);
+  }
     }
 
 
@@ -45,11 +76,6 @@ export default {
 </script>
 
 <style scoped>
-    h2{
-        color: grey;
-    }   
-    div{
-        display: block;
-        margin: 30px;
-    }
+
+
 </style>
