@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="FindaGig" />
+    <img src='./assets/gig-pic.jpg'>
     <!-- <input placeholder="Type something then click 'Display Data'" v-model="msgData"> Experiment to manipulate data from same file -->
-    <Inputs ref="inputTest"/>
+
     <!-- <button v-on:click="saveData">Check In</button> //Button moved to other file--> 
   <br><br>
-    <button v-on:click="accessServer">Access Server</button>
+    <EventTable/>
     <!-- <button v-on:click="displayData">Display Data</button> Experiment to manipulate data from same file -->
+  <br>    <Inputs ref="inputTest"/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import Inputs from './components/Inputs'
+import EventTable from './components/EventTable'
 
 export default {
   name: 'App',
@@ -22,26 +24,10 @@ export default {
     msgData:  ""//initial value only
   }),
   components: {
-    HelloWorld, Inputs
+    HelloWorld, Inputs, EventTable
   },
   methods:{
-     accessServer(){
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type':'application/json'
-            }
-        }
-    
-        fetch('http://localhost:4000/getData', options)
-        .then (response => response.json())
-        .then (data => {
-          console.log(data);
-          console.log(typeof(data));
-        
-          })
-        .catch(error => console.log(error));
-  }, 
+     
 
   // This is how to access info from a child component (if button on this file)
 // saveData(){
@@ -82,8 +68,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-color: black;
+  background-color: whitesmoke;
   padding-bottom: 150px;
   padding-top: 100px;
 }
+
+table, th, td{
+    border: 1px solid black;
+}
+
+table{
+  border-collapse: collapse;
+  margin-left: 50px;
+  }
 </style>

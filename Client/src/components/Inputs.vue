@@ -1,9 +1,9 @@
 <template>
     <div class="inputs">
-        <p>Let us know you've visited us!</p>
-        <p>Your name</P><input id="nameInput" v-model="eName" placeholder="Enter your name">
-        <p>Your city</P><input id="addressInput" v-model="eAddress" placeholder="Enter your city">
-        <button v-on:click="saveData">Check In</button>
+        <h2>...<br>Let us know you've visited us!</h2>
+        <p>Your name</p><input id="nameInput" v-model="eName" placeholder="Enter your name">
+        <p>Your city</p><input id="addressInput" v-model="eAddress" placeholder="Enter your city">
+        <br><br><button v-on:click="saveData">Check In</button>
          <!-- <p>Lol ur address is {{eAddress}} xD</p> Example using modeled data from same file -->
     </div>
 </template>
@@ -45,6 +45,9 @@ export default {
 </script>
 
 <style scoped>
+    h2{
+        color: grey;
+    }   
     div{
         display: block;
         margin: 30px;
