@@ -11,7 +11,7 @@ const assert = require('assert'); //for testing
 
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000; //Used to be 4000 before Heroku
 
 app.use(bodyParser.json()); //transforms each req to json format
 const corsOptions = {

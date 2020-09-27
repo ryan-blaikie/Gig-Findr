@@ -60,7 +60,7 @@ export default {
         })
         .then (response => response.json())
         .then (response => {
-          alert("Thanks! " + response.body);
+          alert("Thanks for checking in!");
           })
         .catch(error => console.log(error));
   }, 
