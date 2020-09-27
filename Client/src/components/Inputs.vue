@@ -48,7 +48,7 @@ export default {
     methods : {
         saveData(){
 
-        fetch('http://localhost:4000/saveData', {
+        fetch('/saveData', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -61,6 +61,7 @@ export default {
         .then (response => response.json())
         .then (response => {
           alert("Thanks for checking in!");
+          console.log(response.body);
           })
         .catch(error => console.log(error));
   }, 

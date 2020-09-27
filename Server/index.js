@@ -11,7 +11,7 @@ const assert = require('assert'); //for testing
 
 
 const app = express();
-const port = process.env.PORT || 8000; //Used to be 4000 before Heroku
+const port = process.env.PORT || 5000; //Used to be 4000 before Heroku
 
 app.use(bodyParser.json()); //transforms each req to json format
 const corsOptions = {
@@ -24,6 +24,17 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 // let dir = __dirname.slice(0, -7); //parent folder
 // app.use(express.static(`${dir}./Client/public`));//test
+
+//Handle production
+if(process.env.NODE_ENV === 'production'){
+    //Static folder
+    app.use(express.static(__dirname + '/public'));
+
+    //Handle single-page application
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html')); //re-directs every route to index.html
+}
+
+
 
 app.get('/', (req, res) => {
   res.send(`Hi! Server is listening on port ${port}`)

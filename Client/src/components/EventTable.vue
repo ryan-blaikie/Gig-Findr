@@ -194,7 +194,7 @@ export default {
                 'Content-Type':'application/json'
             }
         }
-        fetch('http://localhost:4000/getData', options)
+        fetch('/getData', options)
         .then (response => response.json())
         .then (data => {
             this.eventData = data.body;
