@@ -48,7 +48,7 @@ export default {
     methods : {
         saveData(){
 
-        fetch('http://localhost:5000/saveData', {
+        fetch('/saveData', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
