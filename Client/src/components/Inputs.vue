@@ -78,7 +78,7 @@ export default {
                 e.datetime_start = e.datetime_start[1].slice(0,5);
                 e.timezone = ""; //remove name of Auckland as messing with search
             });
-          console.log(data);
+          console.log(data.body);
           })
           
         .catch(error => console.log(error));

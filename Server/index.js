@@ -70,7 +70,7 @@ app.listen(port);
 app.get('/getData', (req, res) => {
     console.log("Client request received");
     res.json({
-        body: data
+        body: "This is a test."  /// should be body: data
     })
 })
 
