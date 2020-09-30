@@ -62,6 +62,28 @@ export default {
           console.log(response.body);
           })
         .catch(error => console.log(error));
+
+        // TEST EVENT
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+        fetch('getData', options)
+        .then (response => response.json())
+        .then (data => {
+            data.body.forEach(e => {
+                e.datetime_start = e.datetime_start.split(' '); //getting the time
+                e.datetime_start = e.datetime_start[1].slice(0,5);
+                e.timezone = ""; //remove name of Auckland as messing with search
+            });
+          console.log(data.body);
+          })
+          
+        .catch(error => console.log(error));
+
+
   }, 
   notify(){
     alert(this.eName);
