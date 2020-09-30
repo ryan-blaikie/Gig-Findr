@@ -24,7 +24,7 @@
                 solo-inverted
                 hide-details
 
-                label="Try searching for your city"
+                label="Try searching your city, a genre, or artist"
             ></v-text-field>
           <v-toolbar-title></v-toolbar-title>
         </v-toolbar>
