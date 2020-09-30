@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 //Fetch data from EventFinda API
 const username = "findagig";
 const pw = "m74tgzy6hyxb";
-let data = {body : "The events have not yet been retrieved from the API"}; //default
+let data = JSON.stringify({body : "The events have not yet been retrieved from the API"}); //default
 const musicTypes = "(146,145,279,154,276,278,277,290,255,286,106,147,248,148,28,150,156,151,153,152,302,265,149)";
 
 async function getEvents(){
