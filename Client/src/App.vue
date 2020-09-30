@@ -2,13 +2,11 @@
   <div id="app">
     <HelloWorld msg="FindaGig" />
     <br><img src='./assets/gig-pic.jpg'>
-    <!-- <input placeholder="Type something then click 'Display Data'" v-model="msgData"> Experiment to manipulate data from same file -->
+  
     <br><br>
     <h2>Upcoming Gigs:</h2>
-    <!-- <button v-on:click="saveData">Check In</button> //Button moved to other file--> 
 
     <EventTable/>
-    <!-- <button v-on:click="displayData">Display Data</button> Experiment to manipulate data from same file -->
   <br>    <Inputs ref="inputTest"/>
   </div>
 </template>
@@ -28,35 +26,6 @@ export default {
     HelloWorld, Inputs, EventTable
   },
   methods:{
-     
-
-  // This is how to access info from a child component (if button on this file)
-// saveData(){
-
-//         fetch('http://localhost:4000/saveData', {
-//             method: 'POST',
-//             headers: {
-//                'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//               name : this.$refs.inputTest.eName,
-//               address : this.$refs.inputTest.eAddress
-//             })
-//         })
-//         .then (response => response.json())
-//         .then (response => {
-//           alert("Thanks! " + response.body);
-//           })
-//         .catch(error => console.log(error));
-//   }, 
-
-  // This used as experiment to manipulate data from same file
-  // displayData(){
-  //   alert(this.msgData);
-  //   console.log(this.$refs.inputTest)
-  //   alert("Address is " + this.$refs.inputTest.eAddress);
-  //   alert("Name is " + this.$refs.inputTest.eName);
-  // }
 }
 }
 </script>

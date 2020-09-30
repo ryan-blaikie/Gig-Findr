@@ -31,8 +31,6 @@
         <v-btn class="mx-2" fab dark color="yellow" v-on:click="saveData"> 
             <v-icon dark>mdi-plus</v-icon>
         </v-btn>
-        <!-- ^^^^Color attribute not working? -->
-         <!-- <p>Lol ur address is {{eAddress}} xD</p> Example using modeled data from same file -->
     </div>
 </template>
 <script>
@@ -48,7 +46,7 @@ export default {
     methods : {
         saveData(){
 
-        fetch('http://localhost:5000/saveData', {
+        fetch('saveData', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

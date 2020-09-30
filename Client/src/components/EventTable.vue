@@ -1,48 +1,6 @@
 <template>
     <div>
-    <!-- <div ref="filters"> -->
-        <!-- <form>
-            <select ref="city" class="centred">
-              <option value="">(All Cities)</option>
-              <option value="Auckland">Auckland</option>
-              <option value="Tauranga">Tauranga</option>
-              <option value="Wellington">Wellington</option>
-              <option value="Christchurch">Christchurch</option>
-              <option value="Dunedin">Dunedin</option>
-            </select>
-          </form>
-    </div>
-    <button ref="filterbtn" v-on:click="applyFilters">Apply Filters</button> -->
     <br><br>
-    <!-- <table ref="gigs" width="80%">
-    </table> -->
-
-
-
-<!-- Probably just replace this with a v-for loop -->
-<!-- Simple Table -->
-    <!-- <v-simple-table dark>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th width=10px> Name</th>
-          <th width=10px>  Genre </th>
-          <th width=10px>Location</th>
-          <th width=20%>Dates</th>
-          <th/>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="event in eventData" :key="event.name">
-          <td>{{ event.name }}</td>
-          <td>{{ event.category.name }}</td>
-          <td>{{ event.location.name }}</td>
-          <td>{{ event.datetime_summary }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table> -->
-
 
   <!-- Data Iterator -->
     <v-container fluid>
@@ -134,58 +92,6 @@ export default {
         }
     },
     methods: {
-    // createTable(data, city) {
-    //     let noResults = true; 
-    //     let tableRef = this.$refs.gigs;
-    //     for(let i=0; i<data.length; i++){
-    //         //exclude canceled and show Auckland only
-    //         if (data[i].is_cancelled == false 
-    //             && data[i].name.includes("SOLD OUT")==false 
-    //             && data[i].address.includes(city)){
-    //             noResults = false;
-
-    //             let name = data[i].name;
-    //             let place = data[i].location.name;
-    //             let dates = data[i].datetime_summary;
-    //             let genre = data[i].category.name;
-                
-    //             //Insert Row
-    //             let newRow  = tableRef.insertRow(-1);
-    //             let cell1 = newRow.insertCell(0);
-    //             let text1 = document.createTextNode(name);
-    //             cell1.appendChild(text1);
-    //             let cell2 = newRow.insertCell(1);
-    //             let text2 = document.createTextNode(place);
-    //             cell2.appendChild(text2);
-    //             let cell3 = newRow.insertCell(2);
-    //             let text3 = document.createTextNode(dates);
-    //             cell3.appendChild(text3);
-    //             let cell4 = newRow.insertCell(1);
-    //             let text4 = document.createTextNode(genre);
-    //             cell4.appendChild(text4);
-    //         }
-    //     }
-    //     // Not sure if CSS display change works like this in vue still
-    //     if (noResults == true){
-    //         // this.$refs.noResultsMsg.css("display", "block");
-    //         }
-    //     else{
-    //         // this.$refs.noResultsMsg.css("display", "none")
-    //             //Construct headers
-    //             let header = tableRef.createTHead();
-    //             // this.$refs.thead.css("text-align", "center");
-    //             let headerR = header.insertRow(0);
-    //             let c1 = headerR.insertCell(0);
-    //             c1.innerHTML = "<b>Name<b>";
-    //             let c2 = headerR.insertCell(1);
-    //             c2.innerHTML = "<b>Genre<b>";
-    //             let c3 = headerR.insertCell(2);
-    //             c3.innerHTML = "<b>Location<b>";
-    //             let c4 = headerR.insertCell(3);
-    //             c4.innerHTML = "<b>Dates<b>";
-    //     }
-    // },
-
 
      accessServer(){
         const options = {
@@ -194,7 +100,7 @@ export default {
                 'Content-Type':'application/json'
             }
         }
-        fetch('http://localhost:5000/getData', options)
+        fetch('getData', options)
         .then (response => response.json())
         .then (data => {
             this.eventData = data.body;
@@ -205,7 +111,6 @@ export default {
             });
             this.items = data.body;
           console.log(this.eventData);
-        //   this.createTable(this.eventData, "");
           })
           
         .catch(error => console.log(error));
