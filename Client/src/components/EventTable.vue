@@ -24,7 +24,7 @@
                 solo-inverted
                 hide-details
 
-                label="Try searching your test, a genre, or artist"
+                label="Try searching your city, a genre, or artist"
             ></v-text-field>
           <v-toolbar-title></v-toolbar-title>
         </v-toolbar>
@@ -116,13 +116,8 @@ export default {
         .catch(error => console.log(error));
   }, 
     },
-    async mounted(){ //need to make this async I believe
-      try{
-        const response = await this.accessServer();
-    }
-        catch(e){
-          conosle.log(e);
-        }
+    mounted(){
+        this.accessServer();
     },
 }
     
