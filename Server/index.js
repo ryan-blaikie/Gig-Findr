@@ -1,3 +1,6 @@
+const eventFindaInfo = require('./eventFindaInfo.js'); 
+const mongoDBInfo = require('./mongoDBInfo'); //contains pw and username
+
 // server/server.js
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -41,8 +44,8 @@ app.get('/', (req, res) => {
 });
 
 //Fetch data from EventFinda API
-const username = "findagig";
-const pw = "m74tgzy6hyxb";
+// const username = "findagig";
+// const pw = "m74tgzy6hyxb";
 let data = JSON.stringify({body : "The events have not yet been retrieved from the API"}); //default
 const musicTypes = "(146,145,279,154,276,278,277,290,255,286,106,147,248,148,28,150,156,151,153,152,302,265,149)";
 
@@ -51,7 +54,7 @@ async function getEvents(){
         const response = await axios({
             method: 'get',
             url: `https://api.eventfinda.co.nz/v2/events.json?rows=20&category=${musicTypes}`,
-            headers: {'Authorization': 'Basic ' + Buffer.from(`${username}:${pw}`).toString('base64')},
+            headers: {'Authorization': 'Basic ' + Buffer.from(`${eventFindaInfo.username}:${eventFindaInfo.pw}`).toString('base64')},
         })
         console.log(response.data.events[0].name);
         data = response.data.events;
@@ -97,7 +100,7 @@ app.post('/saveData', (req, res) =>{
 
 
 
-const mongoUri = "mongodb+srv://ryan-blaikie:Wumbo22*@free-cluster.xabww.mongodb.net/MongoGigDB?retryWrites=true&w=majority";
+const mongoUri = `mongodb+srv://${mongoDBInfo.username}:${mongoDBInfo.pw}@free-cluster.xabww.mongodb.net/MongoGigDB?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoUri, {
         useNewUrlParser : true,

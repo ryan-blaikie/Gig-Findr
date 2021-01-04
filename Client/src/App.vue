@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Gig Findr" />
+    <HelloWorld msg="Gig Findr by Ryan" />
     <br><img src='./assets/gig-pic.jpg'>
   
     <br><br>
