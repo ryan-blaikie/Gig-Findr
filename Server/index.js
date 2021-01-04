@@ -1,7 +1,6 @@
 const eventFindaInfo = require('./eventFindaInfo.js'); 
 const mongoDBInfo = require('./mongoDBInfo'); //contains pw and username
 
-// server/server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -9,9 +8,6 @@ const axios = require('axios');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const assert = require('assert'); //for testing
-// const morgan = require('morgan'); //logs all access
-
-
 
 const app = express();
 const port = process.env.PORT || 5000; //Used to be 4000 before Heroku
@@ -23,29 +19,19 @@ const corsOptions = {
   }
   
 app.use(cors(corsOptions));
-// app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
-// let dir = __dirname.slice(0, -7); //parent folder
-// app.use(express.static(`${dir}./Client/public`));//test
 
 //Handle production
 if(process.env.NODE_ENV === 'production'){
     //Static folder
     app.use(express.static(__dirname + '/public'));
-
-    //Handle single-page application
-    // app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html')); //re-directs every route to index.html
 }
-
-
 
 app.get('/', (req, res) => {
   res.send(`Hi! Server is listening on port ${port}`)
 });
 
 //Fetch data from EventFinda API
-// const username = "findagig";
-// const pw = "m74tgzy6hyxb";
 let data = JSON.stringify({body : "The events have not yet been retrieved from the API"}); //default
 const musicTypes = "(146,145,279,154,276,278,277,290,255,286,106,147,248,148,28,150,156,151,153,152,302,265,149)";
 
@@ -84,10 +70,6 @@ app.get('/testMessage'), (req, res) =>{
     })
 }
 
-// let corsOptions = {
-//     origin: 'http://localhost:8080', //allow post acces from client
-//   }
-
 app.post('/saveData', (req, res) =>{
     
     let jsonObj = req.body;
@@ -110,7 +92,6 @@ mongoose.connect(mongoUri, {
     })
     .then(() => 
         console.log('MongdoDB database connected.'))
-        // uploadData()
     
     .catch((err) => console.log(err));
 
