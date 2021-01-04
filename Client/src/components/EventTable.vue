@@ -100,7 +100,11 @@ export default {
                 'Content-Type':'application/json'
             }
         }
-        fetch('getData', options)
+        const environment = process.env.NODE_ENV;
+        console.log('env:' , environment);
+        const getDataPath = environment !== 'production' ? 'http://localhost:5000/' : '';
+
+        fetch(`${getDataPath}getData`, options)
         .then (response => response.json())
         .then (data => {
             this.eventData = data.body;

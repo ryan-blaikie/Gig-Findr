@@ -46,7 +46,10 @@ export default {
     methods : {
         saveData(){
 
-        fetch('saveData', {
+          const environment = process.env.NODE_ENV;
+          console.log('env:' , environment);
+          const saveDataPath = environment !== 'production' ? 'http://localhost:5000/' : '';
+        fetch(`${saveDataPath}saveData`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
