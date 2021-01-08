@@ -86,7 +86,7 @@ export default {
     data(){
         return {
             eventData : '',
-            items: '',
+            items: [],
             itemsPerPage : 10,
             search: '',
         }
