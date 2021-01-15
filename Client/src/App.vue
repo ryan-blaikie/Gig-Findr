@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HelloWorld msg="Gig Findr by Ryan" />
-    <br><img src='./assets/gig-pic.jpg'>
+    <br><img src='./assets/gig-pic.jpg' width='75%'>
   
     <br><br>
     <h2>Upcoming Gigs:</h2>

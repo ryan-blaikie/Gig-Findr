@@ -34,16 +34,17 @@ app.get('/', (req, res) => {
 //Fetch data from EventFinda API
 let data = JSON.stringify({body : "The events have not yet been retrieved from the API"}); //default
 const musicTypes = "(146,145,279,154,276,278,277,290,255,286,106,147,248,148,28,150,156,151,153,152,302,265,149)";
-
-async function getEvents(){
+let eventsList = []; 
+async function getEvents(offset){
     try {
         const response = await axios({
             method: 'get',
-            url: `https://api.eventfinda.co.nz/v2/events.json?rows=20&category=${musicTypes}`,
+            url: `https://api.eventfinda.co.nz/v2/events.json?rows=20&offset=${offset}&category=${musicTypes}`,
             headers: {'Authorization': 'Basic ' + Buffer.from(`${eventFindaInfo.username}:${eventFindaInfo.pw}`).toString('base64')},
         })
         console.log(response.data.events[0].name);
-        data = response.data.events;
+        for (let i=0; i < response.data.events.length; i++)
+            eventsList.push(response.data.events[i]);
     } 
     catch (error) {
         console.log(error);
@@ -52,7 +53,14 @@ async function getEvents(){
 }
 
 // listen on the port
-getEvents();
+let i = 0;
+let offset = 0; //increments results
+while (i < 10){
+    getEvents(offset);
+    i++;
+    offset +=20;
+}
+data = eventsList;
 app.listen(port);
 
 // Let client JS access data from EventFinda API

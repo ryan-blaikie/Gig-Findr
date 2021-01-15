@@ -9,6 +9,8 @@
       :items-per-page.sync="itemsPerPage"
       hide-default-footer
       :search="search"
+      :sort-by="sortBy.toLowerCase()"
+      :sort-desc="sortDesc"
     >
       <template v-slot:header>
         <v-toolbar
@@ -26,6 +28,32 @@
 
                 label="Try searching your city, a genre, or artist"
             ></v-text-field>
+            <!--  -->
+          <template v-if="$vuetify.breakpoint.mdAndUp">
+            <v-spacer></v-spacer>
+            <v-btn-toggle
+              v-model="sortDesc"
+              mandatory
+            >
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="false"
+              >
+                <v-icon>mdi-arrow-up</v-icon>
+              </v-btn>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="true"
+              >
+                <v-icon>mdi-arrow-down</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </template>
+          <!--  -->
           <v-toolbar-title></v-toolbar-title>
         </v-toolbar>
       </template>
@@ -83,14 +111,15 @@
 <script>
 export default {
     name:'EventTable', 
-    data(){
-        return {
+    data: () => ({
             eventData : '',
             items: [],
             itemsPerPage : 10,
             search: '',
-        }
-    },
+            sortBy: 'name',
+            sortDesc: false,
+            cities : ['Auckland', 'Wellington', 'Christchurch', 'Dunedin'],
+    }),
     methods: {
 
      accessServer(){
