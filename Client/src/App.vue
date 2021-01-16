@@ -1,29 +1,31 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Gig Findr by Ryan" />
-    <br><img src='./assets/gig-pic.jpg' width='75%'>
-  
+    <Title msg="Gig Findr by Ryan" />
+    <br><img src='./assets/gig-pic.jpg' width='60%'>
     <br><br>
     <h2>Upcoming Gigs:</h2>
-
     <EventTable/>
-  <br>    <Inputs ref="inputTest"/>
+  <img ref="evfinda" src = "https://www.eventfinda.co.nz/images/global/attribution.gif?qgocdu">
+  <br>    
+  <Inputs/>
+
+        
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title.vue'
 import Inputs from './components/Inputs'
 import EventTable from './components/EventTable'
 
 export default {
   name: 'App',
   data: ()=>({
-    popupText: "Hello there!",
-    msgData:  ""//initial value only
+
   }),
   components: {
-    HelloWorld, Inputs, EventTable
+    Title, Inputs, EventTable
   },
   methods:{
 }

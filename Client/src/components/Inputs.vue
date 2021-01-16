@@ -1,6 +1,6 @@
 <template>
     <div class="inputs">
-        <h2>...<br>Let us know you've visited us!</h2>
+        <h2>...<br>Let us know you've visited!</h2>
     <div id="inputs">
 
     <v-container fluid>
@@ -9,14 +9,14 @@
     <v-col cols="3">
           <v-text-field 
             background-color="black"
-            label="Your Name"
+            label="Name"
             filled 
             v-model="name"
           ></v-text-field>
     </v-col>
     <v-col cols="3">
           <v-text-field
-            label="Your City"
+            label="City"
             filled
             v-model="city"
           ></v-text-field>
@@ -37,7 +37,7 @@
 export default {
     name: 'Inputs',
     props: [''],
-    data(){ //is this only used for internal reference and not for exporting?
+    data(){ 
         return {
             name : '', 
             city : ''
@@ -45,7 +45,6 @@ export default {
     }, 
     methods : {
         saveData(){
-
           const environment = process.env.NODE_ENV;
           console.log('env:' , environment);
           const saveDataPath = environment !== 'production' ? 'http://localhost:5000/' : '';
@@ -65,16 +64,8 @@ export default {
           console.log(response.body);
           })
         .catch(error => console.log(error));
-
   }, 
-  notify(){
-    alert(this.eName);
-  }
-    }
-
-
-
-    
+    }   
 }
 </script>
 

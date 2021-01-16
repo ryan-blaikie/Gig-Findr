@@ -2,15 +2,12 @@
     <div>
     <br><br>
 
-  <!-- Data Iterator -->
     <v-container fluid>
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
       hide-default-footer
       :search="search"
-      :sort-by="sortBy.toLowerCase()"
-      :sort-desc="sortDesc"
     >
       <template v-slot:header>
         <v-toolbar
@@ -28,32 +25,7 @@
 
                 label="Try searching your city, a genre, or artist"
             ></v-text-field>
-            <!--  -->
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <v-spacer></v-spacer>
-            <v-btn-toggle
-              v-model="sortDesc"
-              mandatory
-            >
-              <v-btn
-                large
-                depressed
-                color="blue"
-                :value="false"
-              >
-                <v-icon>mdi-arrow-up</v-icon>
-              </v-btn>
-              <v-btn
-                large
-                depressed
-                color="blue"
-                :value="true"
-              >
-                <v-icon>mdi-arrow-down</v-icon>
-              </v-btn>
-            </v-btn-toggle>
-          </template>
-          <!--  -->
+
           <v-toolbar-title></v-toolbar-title>
         </v-toolbar>
       </template>
@@ -98,13 +70,8 @@
     </v-data-iterator>
   </v-container>
 
-
-
-    <p ref="noResultsMsg" style="display: none;">We're sorry, it looks like there are no matching gigs!</p>
     <br>
-    <div>
-        <img ref="evfinda" src = "https://www.eventfinda.co.nz/images/global/attribution.gif?qgocdu">
-    </div>
+
     </div>
 </template>
 
@@ -138,7 +105,7 @@ export default {
         .then (data => {
             this.eventData = data.body;
             data.body.forEach(e => {
-                e.datetime_start = e.datetime_start.split(' '); //getting the time
+                e.datetime_start = e.datetime_start.split(' '); 
                 e.datetime_start = e.datetime_start[1].slice(0,5);
                 e.timezone = ""; //remove name of Auckland as messing with search
             });
