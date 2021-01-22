@@ -8,7 +8,6 @@
     <v-col cols="3"></v-col>
     <v-col cols="3">
           <v-text-field 
-            background-color="black"
             label="Name"
             filled 
             v-model="name"
@@ -28,7 +27,7 @@
 
     </div>
         
-        <v-btn class="mx-2" fab dark color="yellow" v-on:click="saveData"> 
+        <v-btn class="mx-2" fab dark  v-on:click="saveData"> 
             <v-icon dark>mdi-plus</v-icon>
         </v-btn>
     </div>

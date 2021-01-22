@@ -1,16 +1,17 @@
 <template>
   <div id="app">
+    <v-app id="inspire">
     <Title msg="Gig Findr by Ryan" />
     <br><img src='./assets/gig-pic.jpg' width='60%'>
-    <br><br>
+    <br>
     <h2>Upcoming Gigs:</h2>
     <EventTable/>
-  <img ref="evfinda" src = "https://www.eventfinda.co.nz/images/global/attribution.gif?qgocdu">
+  <img ref="evfinda" src = "https://www.eventfinda.co.nz/images/global/attribution.gif?qgocdu" width='350'>
   <br>    
   <Inputs/>
 
         
-
+  </v-app>
   </div>
 </template>
 
@@ -22,7 +23,7 @@ import EventTable from './components/EventTable'
 export default {
   name: 'App',
   data: ()=>({
-
+    
   }),
   components: {
     Title, Inputs, EventTable
@@ -42,6 +43,22 @@ export default {
   background-color: whitesmoke;
   padding-bottom: 150px;
   padding-top: 100px;
+}
+
+#inspire{
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background-color: whitesmoke;
+}
+
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 table, th, td{
