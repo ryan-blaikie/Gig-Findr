@@ -23,7 +23,6 @@
                 flat
                 solo-inverted
                 hide-details
-
                 label="Try searching your city, a genre, or artist"
             ></v-text-field>
             <v-spacer/>
@@ -65,7 +64,7 @@
                 <v-col md="10">
                 <v-card-title class="subheading">{{ item.name }}</v-card-title>
                 </v-col><v-col md="2">
-                <v-icon right v-show="hover">mdi-open-in-new</v-icon>
+                <v-icon right v-show="hover|| $isMobile()">mdi-open-in-new</v-icon>
                 </v-col>
                 </v-row>
               <v-divider></v-divider>
@@ -167,6 +166,7 @@ export default {
     window.open(url, "_blank")
   }
     },
+
     mounted(){
         this.accessServer();
     },
