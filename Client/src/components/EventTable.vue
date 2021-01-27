@@ -13,7 +13,6 @@
       <template v-slot:header>
         <v-toolbar
           class="mb-2"
-          
           dark
           flat
         >
@@ -65,9 +64,12 @@
                 <v-card-title class="subheading">{{ item.name }}</v-card-title>
                 </v-col><v-col md="2">
                 <v-icon right v-show="hover|| $isMobile()">mdi-open-in-new</v-icon>
+                <!-- ^Show icon to open in new tab on mobile -->
                 </v-col>
                 </v-row>
               <v-divider></v-divider>
+              <br>
+              <img :src="getImgSrc(item)" onerror="this.src='https://www.greenqueen.com.hk/wp-content/uploads/2020/01/turtletree-labs.jpg';" width="50%" alt="Artist picture">
 
               <v-list dense>
                 <v-list-item>
@@ -114,19 +116,22 @@ export default {
             sortDesc: false,
             selectedCities: [],
             oneCityFilteredItems: [],
-            cities: ['Auckland', 'Christchurch', 'Dunedin', 'Gisborne', 'Hamilton', 'Hastings', 'Lower Hutt', 'Napier','Nelson','New Plymouth', 'Palmerston North', 'Porirua', 'Rotorua', 'Tauranga', 'Upper Hutt','Wellington', 'Whanganui', 'Whangārei']
+            cities: ['Auckland', 'Christchurch', 'Dunedin', 'Gisborne', 'Hamilton', 'Hastings', 'Lower Hutt', 'Napier','Nelson','New Plymouth', 'Palmerston North', 'Porirua', 'Rotorua', 'Tauranga', 'Upper Hutt','Wellington', 'Whanganui', 'Whangārei'],
+            date: new Date().toISOString().substr(0, 10),
+            menu: false,
     }),
     methods: {
       async filterCity(){
         await this.$nextTick()
         if (this.selectedCities.length !== 0){
           this.filteredItems = []; //clear each time
-          this.selectedCities.forEach(c => {
-              this.oneCityFilteredItems = this.items.filter(item => item.location_summary.includes(c)),
-              this.oneCityFilteredItems.forEach(e => this.filteredItems.push(e))
+          for (let i=0; i<this.selectedCities.length; i++){
+              this.oneCityFilteredItems = this.items.filter(item => item.location_summary.includes(this.selectedCities[i]))
+              for (let j=0; j< this.oneCityFilteredItems.length; j++){
+                if (!this.filteredItems.includes(this.oneCityFilteredItems[j]))
+                  this.filteredItems.push(this.oneCityFilteredItems[j])
               }
-            )
-            
+              }
             let sortedByDate = this.filteredItems.sort((a, b) => 
               new Date(b.datetime_start) < new Date(a.datetime_start) ? 1: -1,
             )
@@ -164,11 +169,24 @@ export default {
   }, 
   openUrl(url){
     window.open(url, "_blank")
+  }, 
+
+  getImgSrc(item){
+    let src = ""
+    try{
+      fetch(item.images.images[0].original_url)
+      src = item.images.images[0].original_url
+    }
+    catch(error) {
+      console.log(error)
+      src = "../assets/default_gig_pic.jpg"
+    }
+    return src;
   }
     },
 
     mounted(){
-        this.accessServer();
+          this.accessServer();
     },
 }
     
