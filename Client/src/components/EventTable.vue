@@ -69,7 +69,7 @@
                 </v-row>
               <v-divider></v-divider>
               <br>
-              <img :src="getImgSrc(item)" onerror="this.src='https://www.greenqueen.com.hk/wp-content/uploads/2020/01/turtletree-labs.jpg';" width="50%" alt="Artist picture">
+              <img :src="getImgSrc(item)" onerror="this.src='./default_gig_pic.jpg';" width="50%" alt="Artist picture">
 
               <v-list dense>
                 <v-list-item>
@@ -174,12 +174,11 @@ export default {
   getImgSrc(item){
     let src = ""
     try{
-      fetch(item.images.images[0].original_url)
       src = item.images.images[0].original_url
     }
     catch(error) {
       console.log(error)
-      src = "../assets/default_gig_pic.jpg"
+      src = '././assets/default_gig_pic.jpg'
     }
     return src;
   }
