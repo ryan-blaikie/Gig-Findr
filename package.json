@@ -5,6 +5,9 @@
   "main": "./Server/index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "local": "npm-run-all --parallel start-client start-server",
+    "start-client": "cd Client && npm run serve",
+    "start-server": "cd Server && nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
